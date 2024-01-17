@@ -452,8 +452,10 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (_, a) =>
+    Array.from({ length: n }, (__, b) => (a === b ? 1 : 0))
+  );
 }
 
 /**
@@ -705,8 +707,10 @@ function flattenArray(nestedArray) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  if (arr.length === 0) return 0;
+
+  return arr.reduce((a, c) => c[0] - c[1] + a, 0);
 }
 
 /**
@@ -721,8 +725,20 @@ function calculateBalance(/* arr */) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  let result = [];
+  const answer = [];
+
+  arr.map((e) => {
+    if (result.length === chunkSize) {
+      answer.push(result);
+      result = [];
+    }
+    return result.push(e);
+  });
+
+  answer.push(result);
+  return answer;
 }
 
 /**
@@ -737,8 +753,8 @@ function createChunks(/* arr, chunkSize */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  return indices.reduce((prev, curr) => prev[curr], arr);
 }
 
 /**
@@ -752,8 +768,8 @@ function getElementByIndices(/* arr, indices */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers.map((_, i) => i).filter((i) => numbers[i] % 2 !== 0);
 }
 
 /**
@@ -766,8 +782,8 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map((e) => `#${e.toString(16).toUpperCase().padStart(6, 0)}`);
 }
 
 /**
