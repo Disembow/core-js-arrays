@@ -470,8 +470,12 @@ function getIdentityMatrix(/* n */) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  if (arr.length === 0) return 0;
+
+  const result = arr.reduce((a, c) => a + c, 0) / arr.length;
+
+  return Math.round(result * 100) / 100;
 }
 
 /**
@@ -487,8 +491,10 @@ function getAverage(/* arr */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const length = end - start + 1;
+
+  return Array.from({ length }, (_, i) => start + i);
 }
 
 /**
@@ -553,8 +559,17 @@ function group(/* array, keySelector, valueSelector */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const length = Math.max(arr1.length, arr2.length);
+
+  const arr = Array.from({ length }, (_, i) => {
+    const a = arr1[i] === undefined ? 0 : arr1[i];
+    const b = arr2[i] === undefined ? 0 : arr2[i];
+
+    return a + b;
+  });
+
+  return arr;
 }
 
 /**
