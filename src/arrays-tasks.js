@@ -838,8 +838,25 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let result = 0;
+  let prev = -10000;
+  let prevMaxResult = 0;
+
+  nums.map((e) => {
+    if (e > prev) {
+      result += 1;
+    } else {
+      if (prevMaxResult < result) prevMaxResult = result;
+      result = 1;
+    }
+
+    prev = e;
+
+    return e;
+  });
+
+  return result > prevMaxResult ? result : prevMaxResult;
 }
 
 /**
@@ -855,8 +872,18 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  if (n < 0) {
+    arr.push(arr.shift());
+
+    return shiftArray(arr, n + 1);
+  }
+
+  if (n === 0) return arr;
+
+  arr.unshift(arr.pop());
+
+  return shiftArray(arr, n - 1);
 }
 
 module.exports = {
